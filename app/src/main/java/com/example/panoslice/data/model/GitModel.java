@@ -1,9 +1,10 @@
 package com.example.panoslice.data.model;
 
-import com.example.panoslice.data.model.ItemModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GitModel {
@@ -17,7 +18,13 @@ public class GitModel {
     @SerializedName("items")
     @Expose
     private List<ItemModel> items = null;
-    private final static long serialVersionUID = -2190028490116012642L;
+
+    public GitModel(Integer totalCount, Boolean incompleteResults, List<ItemModel> items) {
+
+        this.totalCount = totalCount;
+        this.incompleteResults = incompleteResults;
+        this.items = items;
+    }
 
     public Integer getTotalCount() {
         return totalCount;
@@ -39,17 +46,7 @@ public class GitModel {
         return items;
     }
 
-    public void setItems(List<ItemModel> items) {
-        this.items = items;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public GitModel(Integer totalCount, Boolean incompleteResults, List<ItemModel> items) {
-        this.totalCount = totalCount;
-        this.incompleteResults = incompleteResults;
+    public void setItems(ArrayList<ItemModel> items) {
         this.items = items;
     }
 }

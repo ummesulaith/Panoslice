@@ -8,5 +8,5 @@ import retrofit2.http.Query;
 
 public interface RetrofitCall {
     @GET("repositories?")
-    Call<GitModel> getRepoDetails(@Query("q") String repoName)
+    Call<GitModel> getRepoDetails(@Query("q") String repoName);
 }
