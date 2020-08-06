@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.LinearLayout;
 
 import com.example.panoslice.data.model.GitModel;
 import com.example.panoslice.ui.RecyclerViewAdapter;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    LinearLayout linearLayout;
     RecyclerViewAdapter recyclerViewAdapter;
     UserViewModel viewModel;
     String who;
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        linearLayout = findViewById(R.id.welcome);
         context = getApplicationContext();
         setUpRecyclerView();
 
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
 
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
@@ -103,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 viewModel.clear();
                 doSearchUser(query);
 //                searchAdapter.getFilter().filter(query);
+
+                linearLayout.setVisibility(View.GONE);
                 return false;
             }
 

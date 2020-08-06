@@ -62,9 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-//        System.out.println("Checking mData"+mData);
-//        for (int i=0;i<gitModel.getItems().size();i++)
-//        {
+
             Glide.with(mContext).load(gitModel.getItems().get(position).getOwner().getAvatarURL()).into(holder.imageView);
             holder.name.setText(gitModel.getItems().get(position).getName());
             holder.fullname.setText(gitModel.getItems().get(position).getFullName());
@@ -72,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             System.out.println("Avatr"+Glide.with(mContext).load(gitModel.
                     getItems().get(position).getOwner().getAvatarURL()).into(holder.imageView));
-//        }
+
 
 
 
