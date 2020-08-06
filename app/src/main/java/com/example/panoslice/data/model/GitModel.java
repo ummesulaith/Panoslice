@@ -1,5 +1,6 @@
-package com.example.panoslice;
+package com.example.panoslice.data.model;
 
+import com.example.panoslice.data.model.ItemModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
