@@ -1,6 +1,6 @@
 package com.example.panoslice.data.remote;
 
-import com.example.panoslice.APIConfig;
+import com.example.panoslice.data.util.APIConfig;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

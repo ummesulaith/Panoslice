@@ -1,4 +1,4 @@
-package com.example.panoslice;
+package com.example.panoslice.viewModel;
 
 import android.util.Log;
 
@@ -24,10 +24,7 @@ public class UserViewModel extends ViewModel {
 
     private ArrayList<GitModel> savedData = new ArrayList<GitModel>();
 
-    private ArrayList<GitModel> mAvatimage = new ArrayList<>();
-    private ArrayList<GitModel> mName = new ArrayList<>();
-    private ArrayList<GitModel> mFullname = new ArrayList<>();
-    private ArrayList<GitModel> mWatchercount = new ArrayList<>();
+
 
 
     public void getResponse(String query)
@@ -44,22 +41,10 @@ public class UserViewModel extends ViewModel {
                     GitModel model = response.body();
 
 
-                 for (int i =0;i<model.getItems().size();i++)
-//                 {
-//                     mAvatimage.add(model.getItems().get(i).getOwner().getAvatarURL().toString());
-//                     mFullname.add(model.getItems().get(i).getFullName());
-//                     mName.add(model.getItems().get(i).getName());
-//                     mWatchercount.add(model.getItems().get(i).getName());
-//
-//                 }
-
                     savedData.add(model);
                     mutableLiveData.setValue(savedData);
                     Log.d("DBG", "OK");
-                    Log.d("DBG", "OK::"+savedData.toString());
-                    System.out.println("q1"+savedData);
-                    System.out.println("q2"+response.message());
-                    System.out.println("q3"+response.raw());
+
 
 
                 }

@@ -1,4 +1,4 @@
-package com.example.panoslice;
+package com.example.panoslice.data.util;
 
 public class APIConfig {
 

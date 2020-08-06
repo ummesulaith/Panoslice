@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 
 import com.example.panoslice.data.model.GitModel;
 import com.example.panoslice.ui.RecyclerViewAdapter;
+import com.example.panoslice.viewModel.UserViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,11 +83,10 @@ public class MainActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
                 if(!recyclerView.canScrollVertically(1) && dy != 0) {
-//                    if (currentPage < TOTAL_PAGES) {
-//                        ++currentPage;
+
                         doSearchUser(who);
                     }
-//                }
+
             }
         });
     }

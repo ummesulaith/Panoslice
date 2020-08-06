@@ -35,17 +35,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mContext = mContext;
         this.mData = mData;
 
-        System.out.println("Check1");
+
     }
 
     @NonNull
     @Override
     public RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view;
-//        LayoutInflater mInflater = LayoutInflater.from(mContext);
-//        view = mInflater.inflate(R.layout.item_layout, parent, false);
-        System.out.println("Check2");
-//        return new MyViewHolder(view);
+
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_layout,parent,false);
@@ -78,8 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        System.out.println("Check4");
-        System.out.println("check4 Size:"+mData.size());
+
         return mData.size();
     }
 
@@ -91,11 +86,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-    public void setmData(ArrayList<GitModel> data)
-    {
-        this.mData = mData;
-        notifyDataSetChanged();
-    }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -141,9 +131,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
 
 
-//                    if (item.getLogin().toLowerCase().contains(filterPattern)) {
-//                        filteredList.add(item);
-//                    }
                 }
             }
 
