@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.panoslice.R;
 import com.example.panoslice.data.model.GitModel;
+import com.example.panoslice.data.model.ItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Filterable {
 
     private Context mContext;
-    private ArrayList<GitModel> mAvatimage = new ArrayList<>();
+    private ArrayList<ItemModel> mAvatimage = new ArrayList<>();
     private ArrayList<GitModel> mName = new ArrayList<>();
     private ArrayList<GitModel> mFullname = new ArrayList<>();
     private ArrayList<GitModel> mWatchercount = new ArrayList<>();
-    private ArrayList<GitModel> mData = new ArrayList<>();
+    private ArrayList<ItemModel> mData = new ArrayList<>();
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<GitModel> mData) {
+    public RecyclerViewAdapter(Context mContext, ArrayList<ItemModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
 
@@ -53,19 +54,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder,final int position) {
 
         System.out.println("Check3");
-        GitModel gitModel = mData.get(position);
+        ItemModel gitModel = mData.get(position);
 
 
 
 
 
-            Glide.with(mContext).load(gitModel.getItems().get(position).getOwner().getAvatarURL()).into(holder.imageView);
-            holder.name.setText(gitModel.getItems().get(position).getName());
-            holder.fullname.setText(gitModel.getItems().get(position).getFullName());
-            holder.watchlist.setText(gitModel.getItems().get(position).getWatchersCount().toString());
 
-            System.out.println("Avatr"+Glide.with(mContext).load(gitModel.
-                    getItems().get(position).getOwner().getAvatarURL()).into(holder.imageView));
+            Glide.with(mContext).load(gitModel.getOwner().getAvatarURL()).into(holder.imageView);
+            holder.name.setText(gitModel.getName());
+            holder.fullname.setText(gitModel.getFullName());
+            holder.watchlist.setText(gitModel.getWatchersCount().toString());
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,7 +85,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-
+System.out.println("Mdata size:"+mData.size());
         return mData.size();
     }
 
@@ -113,22 +124,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Filter searchFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<GitModel> filteredList = new ArrayList<>();
+            List<ItemModel> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(mData);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (GitModel item : mData) {
+                for (ItemModel item : mData) {
 
-                    for (int i =0;i<item.getItems().size();i++)
-                    {
-                        if (item.getItems().get(i).getName().contains(filterPattern))
+
+                        if (item.getName().contains(filterPattern))
                         {
                             filteredList.add(item);
                         }
-                    }
+
 
 
                 }
@@ -148,7 +158,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     };
 
-    public void updateData(ArrayList<GitModel> newList){
+    public void updateData(ArrayList<ItemModel> newList){
         this.mName.clear();
         this.mData.addAll(newList);
     }

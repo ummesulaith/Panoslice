@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 
 import com.example.panoslice.data.model.GitModel;
+import com.example.panoslice.data.model.ItemModel;
 import com.example.panoslice.ui.RecyclerViewAdapter;
 import com.example.panoslice.viewModel.UserViewModel;
 
@@ -31,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdapter recyclerViewAdapter;
     UserViewModel viewModel;
     String who;
-    List<GitModel> tmpList;
+    List<ItemModel> tmpList;
     Context context;
-    ArrayList<GitModel> mData = new ArrayList<GitModel>();
+    ArrayList<ItemModel> mData = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,31 +45,37 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         setUpRecyclerView();
 
-        tmpList = new ArrayList<GitModel>();
+        tmpList = new ArrayList<ItemModel>();
 
         viewModel = viewModel = new ViewModelProvider(this,
                 new ViewModelProvider.NewInstanceFactory()).get(UserViewModel.class);
     }
 
     private void doSearchUser(String who) {
+
         viewModel.getResponse(who);
 
-        viewModel.getSearchResult().observe(this, new Observer<ArrayList<GitModel>>() {
+        viewModel.getSearchResult().observe(this, new Observer<ArrayList<ItemModel>>() {
             @Override
-            public void onChanged(ArrayList<GitModel> theList) {
+            public void onChanged(ArrayList<ItemModel> theList) {
 
                 recyclerViewAdapter.updateData(theList);
 
                 recyclerView.post(new Runnable() {
                     @Override
                     public void run() {
+
                         recyclerViewAdapter.notifyDataSetChanged();
+
                     }
                 });
             }
         });
+
     }
     private void setUpRecyclerView() {
+
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -84,15 +93,18 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!recyclerView.canScrollVertically(1) && dy != 0) {
 
-                        doSearchUser(who);
-                    }
+                    doSearchUser(who);
+                }
 
             }
         });
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
 
@@ -100,15 +112,19 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 who = query;
                 recyclerViewAdapter.clear();
                 viewModel.clear();
                 doSearchUser(query);
-//                searchAdapter.getFilter().filter(query);
+                recyclerViewAdapter.getFilter().filter(query);
 
                 linearLayout.setVisibility(View.GONE);
+
+
                 return false;
             }
 

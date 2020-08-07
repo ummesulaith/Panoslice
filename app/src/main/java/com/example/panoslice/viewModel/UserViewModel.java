@@ -7,11 +7,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.panoslice.data.model.GitModel;
+import com.example.panoslice.data.model.ItemModel;
 import com.example.panoslice.data.remote.APIService;
 import com.example.panoslice.data.remote.RetrofitCall;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,9 +20,9 @@ import retrofit2.Retrofit;
 
 public class UserViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<GitModel>> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<ItemModel>> mutableLiveData = new MutableLiveData<ArrayList<ItemModel>>();
 
-    private ArrayList<GitModel> savedData = new ArrayList<GitModel>();
+    private ArrayList<ItemModel> savedData = new ArrayList<>();
 
 
 
@@ -40,8 +40,8 @@ public class UserViewModel extends ViewModel {
 
                     GitModel model = response.body();
 
-
-                    savedData.add(model);
+                    savedData.addAll(response.body().getItems());
+//                    savedData.add(model);
                     mutableLiveData.setValue(savedData);
                     Log.d("DBG", "OK");
 
@@ -58,13 +58,13 @@ public class UserViewModel extends ViewModel {
         });
     }
 
-    public LiveData<ArrayList<GitModel>> getSearchResult(){
+    public LiveData<ArrayList<ItemModel>> getSearchResult(){
         return mutableLiveData;
     }
 
     public void clear(){
         savedData.clear();
-        mutableLiveData.setValue(new ArrayList<GitModel>());
+        mutableLiveData.setValue(new ArrayList<ItemModel>());
     }
 
 
