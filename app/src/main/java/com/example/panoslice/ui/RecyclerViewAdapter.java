@@ -27,9 +27,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
     private ArrayList<ItemModel> mAvatimage = new ArrayList<>();
-    private ArrayList<GitModel> mName = new ArrayList<>();
-    private ArrayList<GitModel> mFullname = new ArrayList<>();
-    private ArrayList<GitModel> mWatchercount = new ArrayList<>();
+    private ArrayList<ItemModel> mName = new ArrayList<>();
+    private ArrayList<ItemModel> mFullname = new ArrayList<>();
+    private ArrayList<ItemModel> mWatchercount = new ArrayList<>();
     private ArrayList<ItemModel> mData = new ArrayList<>();
 
     public RecyclerViewAdapter(Context mContext, ArrayList<ItemModel> mData) {

@@ -41,7 +41,6 @@ public class UserViewModel extends ViewModel {
                     GitModel model = response.body();
 
                     savedData.addAll(response.body().getItems());
-//                    savedData.add(model);
                     mutableLiveData.setValue(savedData);
                     Log.d("DBG", "OK");
 
